@@ -1,0 +1,24 @@
+<h1>商品一覧</h1>
+<table>
+  <thead>
+    <tr>
+      <th>商品ID</th>
+      <th>商品名</th>
+      <th>税抜価格</th>
+      <th>ジャンル</th>
+      <th>ステータス</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @items.each do |item| %>
+    <tr>
+      <td>通し番号 1～10</td>
+      <td><%= link_to item.name, admin_item_path(item.id) %></td>
+      <td><%= item.price.to_s(:delimited, delimiter: ",") %></td>
+      <td><%= item.genre.name %></td>
+      <td><%= item.is_active %></td>
+      <td><%= link_to "削除", admin_item_path(item.id), method: :delete %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
