@@ -5,6 +5,41 @@
   <%# 画像サイズの指定も必要か？ %>
 </div>
 
+<table>
+  <tr>
+    <td>商品名</td>
+    <td><%= @item.name %></td>
+  </tr>
+
+  <tr>
+    <td>商品説明</td>
+    <td><%= @item.introduction %></td>
+  </tr>
+
+  <tr>
+    <td>ジャンル</td>
+    <td><%= @item.genre.name %></td>
+  </tr>
+
+  <tr>
+    <%# 税込価格になるように消費税計算を加える %>
+    <%# 税抜価格は（　）に表示されるようにする %>
+    <td>
+      税込価格<br>(税抜価格)
+    </td>
+    <td>
+      "税込価格"<%= @item.price %>円
+    </td>
+  </tr>
+
+  <tr>
+    <td>販売ステータス</td>
+    <td><%= @item.is_active %></td>
+  </tr>
+</table>
+
+
+
 <div class="form-group">
   <%# 商品名, item.name %>
 </div>
