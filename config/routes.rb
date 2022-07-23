@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   namespace :admin do
+    resources :customers, only: [:index, :show, :edit, :update]
+  end
+
+  namespace :admin do
     resources :items, only: [:new, :index, :create, :show, :edit, :update, :destroy]
   end
 

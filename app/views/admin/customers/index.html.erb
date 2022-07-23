@@ -1,0 +1,33 @@
+<h1>会員一覧</h1>
+
+<table>
+  <thead>
+    <tr>
+      <td>会員ID</td>
+      <td>氏名</td>
+      <td>メールアドレス</td>
+      <td>ステータス</td>
+    </tr>
+  </thead>
+
+  <tbody>
+    <%# @customers.each do |customers| %>
+    <tr>
+      <td>
+        <%# 会員idの実装 %>
+        <%# 通し番号にする %>
+      </td>
+
+      <td><%# link_to customers.name, admin_customer_path(customer.id) %></td>
+      <td><%# customers.email %></td>
+      <td><%# customers.is_deleted %></td>
+    </tr>
+    <%# end %>
+  </tbody>
+</table>
+
+<div class="pagi-nation">
+  <%# ページネーション実装 %>
+  <%# 1, 2, 3, Next >, Last >> の5つを作成 %>
+  <%# gem導入　⇒　gemファイル（Kaminari） %>
+</div>

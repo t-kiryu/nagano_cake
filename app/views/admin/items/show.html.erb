@@ -1,8 +1,11 @@
 <h1>商品詳細</h1>
 
 <div class="form-group">
-  <%# 商品画像 %>
-  <%# 画像サイズの指定も必要か？ %>
+  <% if @item.image.attached? %>
+    <%= image_tag item.image, size: "200x200" %>
+  <% else %>
+    <%= image_tag "no_image", size: "200x200" %>
+  <% end %>
 </div>
 
 <table>
@@ -22,13 +25,11 @@
   </tr>
 
   <tr>
-    <%# 税込価格になるように消費税計算を加える %>
-    <%# 税抜価格は（　）に表示されるようにする %>
     <td>
       税込価格<br>(税抜価格)
     </td>
     <td>
-      "税込価格"<%= @item.price %>円
+      <%= @item.with_tax_price.to_s(:delimited) %>(<%= @item.price.to_s(:delimited) %>)円
     </td>
   </tr>
 
@@ -38,32 +39,6 @@
   </tr>
 </table>
 
-
-
-<div class="form-group">
-  <%# 商品名, item.name %>
-</div>
-
-<div class="form-group">
-  <%# 商品説明, item.introduction %>
-</div>
-
-<div class="form-group">
-  <%# 商品ジャンル, item.genre.name? %>
-  <%# アソシエーション、コントローラ確認 %>
-</div>
-
-<div class="form-group">
-  <%# 税込価格 %>
-  <%# 税抜価格, item.price.to_s(:delimited, delimiter: ",") %>
-  <%# 税抜価格は（　）内に表示する %>
-</div>
-
-<div class="form-group">
-  <%# 商品販売ステータス %>
-</div>
-
 <div class="form-group">
   <%= link_to "編集する", edit_admin_item_path(@item.id) %>
-　<%# ボタン表示にする %>
 </div>

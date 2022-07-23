@@ -1,4 +1,5 @@
 <h1>商品一覧</h1>
+
 <table>
   <thead>
     <tr>
@@ -12,9 +13,13 @@
   <tbody>
     <% @items.each do |item| %>
     <tr>
-      <td>通し番号 1～10</td>
+      <td>
+        <%# 商品idの実装 %>
+        <%# 通し番号にする %>
+      </td>
+
       <td><%= link_to item.name, admin_item_path(item.id) %></td>
-      <td><%= item.price.to_s(:delimited, delimiter: ",") %></td>
+      <td><%= item.price.to_s(:delimited) %></td>
       <td><%= item.genre.name %></td>
       <td><%= item.is_active %></td>
       <td><%= link_to "削除", admin_item_path(item.id), method: :delete %></td>
@@ -22,3 +27,9 @@
     <% end %>
   </tbody>
 </table>
+
+<div class="pagi-nation">
+  <%# ページネーション実装 %>
+  <%# 1, 2, 3, Next >, Last >> の5つを作成 %>
+  <%# gem導入　⇒　gemファイル（Kaminari） %>
+</div>
