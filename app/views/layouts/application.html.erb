@@ -11,8 +11,22 @@
   </head>
 
   <body>
+    <header>
+      <div>
+        <ul>
+          <% if customer_signed_in? %>
+            <li>マイページ</li>
+          <% elsif admin_signed_in? %>
+            <li>管理者</li>
+          <% else %>
+            <li>サインインなし</li>
+          <% end %>
+        </ul>
+      </div>
+    </header>
 
-
-    <%= yield %>
+    <main>
+      <%= yield %>
+    </main>
   </body>
 </html>
