@@ -13,13 +13,34 @@
   <body>
     <header>
       <div>
+        <%# Logo画像入れる場所 %>
+        <%# homeに遷移するようにする？ => Bookers2参考にする %>
+      </div>
+
+      <div>
+        <%# 会員ログイン時にフラッシュメッセージ実装 %>
+        <%# ログイン時は常に表示されるようにする %>
+        <%# ようこそ、##さん！ => 苗字を呼び出す実装%>
+      </div>
+
+      <div class="nab">
         <ul>
           <% if customer_signed_in? %>
             <li>マイページ</li>
+            <li>商品一覧</li>
+            <li>カート</li>
+            <li>ログアウト</li>
           <% elsif admin_signed_in? %>
-            <li>管理者</li>
+            <li><%= link_to "商品一覧", admin_items_path %></li>
+            <li><%= link_to "会員一覧", admin_customers_path %></li>
+            <li><%= link_to "注文履歴一覧", admin_root_path %></li>
+            <li><%= link_to "ジャンル一覧", admin_genres_path %></li>
+            <li>ログアウト</li>
           <% else %>
-            <li>サインインなし</li>
+            <li>About</li>
+            <li>商品一覧</li>
+            <li><%= link_to "新規登録", new_customer_registration_path %></li>
+            <li><%= link_to "ログイン", new_customer_session path %></li>
           <% end %>
         </ul>
       </div>
