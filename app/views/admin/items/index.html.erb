@@ -1,4 +1,10 @@
-<h1>商品一覧</h1>
+<div>
+  <h5>商品一覧</h5>
+</div>
+
+<div>
+  <%= link_to "商品新規登録", new_admin_item_path %>
+</div>
 
 <table>
   <thead>
@@ -11,13 +17,9 @@
     </tr>
   </thead>
   <tbody>
-    <% @items.each do |item| %>
+    <% @items.each_with_index do |item, i| %>
     <tr>
-      <td>
-        <%# 商品idの実装 %>
-        <%# 通し番号にする %>
-      </td>
-
+      <td><%= i + 1 %></td>
       <td><%= link_to item.name, admin_item_path(item.id) %></td>
       <td><%= item.price.to_s(:delimited) %></td>
       <td><%= item.genre.name %></td>
