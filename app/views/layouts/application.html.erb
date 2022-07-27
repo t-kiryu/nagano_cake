@@ -20,7 +20,7 @@
       <div>
         <%# 会員ログイン時にフラッシュメッセージ実装 %>
         <%# ログイン時は常に表示されるようにする %>
-        <%# ようこそ、##さん！ => 苗字を呼び出す実装%>
+        <%# 「ようこそ、##さん！」と表示 => 苗字を呼び出す実装%>
       </div>
 
       <div class="nab">
@@ -35,12 +35,13 @@
             <li><%= link_to "会員一覧", admin_customers_path %></li>
             <li><%= link_to "注文履歴一覧", admin_root_path %></li>
             <li><%= link_to "ジャンル一覧", admin_genres_path %></li>
-            <li>ログアウト</li>
+            <li><%= link_to "ログアウト", destroy_admin_session_path, method: :delete %></li>
           <% else %>
-            <li>About</li>
+            <li><%= link_to "About", about_path %></li>
             <li>商品一覧</li>
+            <%# ログイン前に閲覧可能な商品一覧ページへ遷移 %>
             <li><%= link_to "新規登録", new_customer_registration_path %></li>
-            <li><%= link_to "ログイン", new_customer_session path %></li>
+            <li><%= link_to "ログイン", new_customer_session_path %></li>
           <% end %>
         </ul>
       </div>
