@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
 
+  namespace :public do
+    get 'customers/my_page' => 'customers#show'
+    get 'customers/infomation/edit' => 'customers#edit'
+    patch 'customers/ifromation' => 'customers#update'
+    resources :customers
+  end
+
   scope module: :public do
     root to: 'homes#top'
     get 'about' => 'homes#about'
@@ -7,9 +14,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root to: 'homes#top'
-    resources :genres,    only: [:index, :create, :edit, :update, :destroy]
-    resources :items,     only: [:new, :index, :create, :show, :edit, :update, :destroy]
-    resources :customers, only: [:index, :show, :edit, :update]
+    resources :genres, :items, :customers
   end
 
   devise_for :customers,skip: [:passwords], controllers: {
