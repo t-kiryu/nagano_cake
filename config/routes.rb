@@ -1,20 +1,25 @@
 Rails.application.routes.draw do
 
   namespace :public do
-    get 'customers/my_page' => 'customers#show'
-    get 'customers/infomation/edit' => 'customers#edit'
-    patch 'customers/ifromation' => 'customers#update'
-    resources :customers
+    get 'addresses/index'
+    get 'addresses/edit'
   end
-
   scope module: :public do
     root to: 'homes#top'
-    get 'about' => 'homes#about'
+    get   'about' => 'homes#about'
+    get   'customers/my_page'         => 'customers#show'
+    get   'customers/infomation/edit' => 'customers#edit'
+    patch 'customers/infomation'      => 'customers#update'
+    get   'customers/unsubscribe'     => 'customers#unsubscribe'
+    get   'items'     => 'items#index'
+    get   'items/:id' => 'items#show'
   end
 
   namespace :admin do
     root to: 'homes#top'
-    resources :genres, :items, :customers
+    resources :customers, only: [:index, :show, :edit, :update]
+    resources :items,     only: [:new, :create, :index, :show, :edit, :update, :destroy]
+    resources :genres,    only: [:index, :create, :edit, :update, :destroy]
   end
 
   devise_for :customers,skip: [:passwords], controllers: {
