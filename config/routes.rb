@@ -12,12 +12,7 @@ Rails.application.routes.draw do
     get   'items'     => 'items#index'
     get   'items/:id' => 'items#show'
 
-    get   'addresses'          => 'addresses#index'
-    get   'addresses'          => 'addresses#new'
-    get   'addresses/:id/edit' => 'addresses#edit'
-    post  'addresses'          => 'addresses#create'
-    patch 'addresses/:id'      => 'addresses#update'
-    delete 'addresses/:id'     => 'addresses#destroy'
+    resources :addresses, only: [:new, :index, :create, :edit, :update, :destroy]
   end
 
   namespace :admin do
