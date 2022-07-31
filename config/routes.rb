@@ -1,18 +1,23 @@
 Rails.application.routes.draw do
 
-  namespace :public do
-    get 'addresses/index'
-    get 'addresses/edit'
-  end
   scope module: :public do
     root to: 'homes#top'
     get   'about' => 'homes#about'
+
     get   'customers/my_page'         => 'customers#show'
     get   'customers/infomation/edit' => 'customers#edit'
     patch 'customers/infomation'      => 'customers#update'
     get   'customers/unsubscribe'     => 'customers#unsubscribe'
+
     get   'items'     => 'items#index'
     get   'items/:id' => 'items#show'
+
+    get   'addresses'          => 'addresses#index'
+    get   'addresses'          => 'addresses#new'
+    get   'addresses/:id/edit' => 'addresses#edit'
+    post  'addresses'          => 'addresses#create'
+    patch 'addresses/:id'      => 'addresses#update'
+    delete 'addresses/:id'     => 'addresses#destroy'
   end
 
   namespace :admin do
