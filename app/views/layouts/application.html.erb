@@ -13,8 +13,8 @@
   <body>
     <header>
       <div>
-        <%# Logo画像入れる場所 %>
-        <%# homeに遷移するようにする？ => Bookers2参考にする %>
+        <%# Logoマーク入れる入れる場所 %>
+        <a href="/">LOGO</a>
       </div>
 
       <div>
@@ -27,11 +27,9 @@
         <ul>
           <% if customer_signed_in? %>
             <li><%= link_to "マイページ", customers_my_page_path(@customer) %></li>
+            <li><%= link_to "商品一覧", items_path %></li>
 
-            <%# 会員ログイン後の商品一覧ページ %>
-            <li>商品一覧</li>
-
-            <%# カート一覧ページ %>
+            <%# カート一覧ページへのリンク実装 %>
             <li>カート</li>
 
             <li><%= link_to "ログアウト", destroy_customer_session_path, method: :delete %></li>
@@ -43,10 +41,7 @@
             <li><%= link_to "ログアウト", destroy_admin_session_path, method: :delete %></li>
           <% else %>
             <li><%= link_to "About", about_path %></li>
-
-            <%# ログイン前に閲覧可能な商品一覧ページへ遷移 %>
-            <li>商品一覧</li>
-
+            <li><%= link_to "商品一覧", items_path %></li>
             <li><%= link_to "新規登録", new_customer_registration_path %></li>
             <li><%= link_to "ログイン", new_customer_session_path %></li>
           <% end %>

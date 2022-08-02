@@ -1,12 +1,36 @@
 <div>
-  <%# ジャンル検索ボックス %>
+  <table>
+    <thead>
+      <tr>
+        <th>ジャンル検索</th>
+        <%# 登録しているジャンルidを呼び出す => genre.name
+        <%# each文を使って登録済みジャンルを全部表示？ %>
+        <%# itemsとgenresのアソシエーション必要？ %>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%# @item.genre.name %></td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 
 <div>
   <h1>商品一覧</h1>
-  (全xxx件)
-  <%# 商品画像、商品名、税抜価格を取得する %>
+
+  <%# countを使って商品数を取得？ %>
+  <b>(全<%= @items.count %>件)</b>
+
+  <% @items.each do |item| %>
+  <div>
+    <%= item.image %></br>
+    <%= item.name %></br>
+    ¥<%= item.with_tax_price.to_s(:delimited) %>
+  </div>
+  <% end %>
 </div>
 
-<%# ページネーションを実装 %>
-<%# itemsコントローラのindexアクションへ取得アイテム数を記述 %>
+<%# ページネーションを1ページ8商品表示にしたい %>
+<%# indexアクションへpageの後に.per(8)を入れたらカウント数がうまくいかない %>
+<%= paginate @items %>

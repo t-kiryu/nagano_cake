@@ -1,0 +1,47 @@
+<div>
+  <%# ジャンル検索機能の実装 %>
+  <%# 部分テンプレート作成・実装 %>
+  <table>
+    <thead>
+      <tr>ジャンル検索</tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <%# item.genre.name %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div>
+  <%# バックグラウンドイメージ画像 %>
+  <div>
+    <p>
+      ようこそ、ながのCAKEへ！</br>
+      このサイトは、ケーキ販売のECサイトになります。</br>
+      会員でない方も商品の閲覧はできますが、</br>
+      購入には会員登録が必要になります。
+    </p>
+  </div>
+
+  <div>
+    <h3>新着商品</h3>
+
+    <div>
+      <%# 商品一覧(4コマ並べる) %>
+      <%# ステータスが「販売中」のものを全商品からランダムに表示 %>
+
+      <% @items.each do |item| %>
+        <%= item.image %>
+        <%= item.name %>
+        ¥<%= item.with_tax_price.to_s(:delimited) %>
+      <% end %>
+    </div>
+
+    <div>
+      <%= link_to "全ての商品を見る >",items_path %>
+    </div>
+  </div>
+</div>
