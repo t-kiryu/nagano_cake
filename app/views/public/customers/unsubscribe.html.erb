@@ -9,6 +9,7 @@
 </div>
 
 <div>
-  退会しない <%# 退会しない　⇒　xxxへ遷移するよう設定 %>
-  退会する   <%# 退会する　　⇒退会処理が進むようにする %>
+  <%= link_to "退会しない", customers_my_page_path %>
+  退会する
+  <%# link_to "退会する", customers_withdrawal_path, method: :patch, date: {conrilm: "本当に退会しますか？"} %>
 </div>

@@ -19,13 +19,12 @@
 <div>
   <h1>商品一覧</h1>
 
-  <%# countを使って商品数を取得？ %>
   <b>(全<%= @items.count %>件)</b>
 
   <% @items.each do |item| %>
   <div>
-    <%= item.image %></br>
-    <%= item.name %></br>
+    <%= link_to item.image, items_path(item) %></br>
+    <%= item.name, %></br>
     ¥<%= item.with_tax_price.to_s(:delimited) %>
   </div>
   <% end %>

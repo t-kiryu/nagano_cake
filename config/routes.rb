@@ -4,13 +4,20 @@ Rails.application.routes.draw do
     root to: 'items#top'
     get   'about' => 'items#about'
 
-    get   'customers/my_page'         => 'customers#show'
-    get   'customers/infomation/edit' => 'customers#edit'
-    patch 'customers/infomation'      => 'customers#update'
-    get   'customers/unsubscribe'     => 'customers#unsubscribe'
+    get    'customers/my_page'         => 'customers#show'
+    get    'customers/infomation/edit' => 'customers#edit'
+    patch  'customers/infomation'      => 'customers#update'
+    get    'customers/unsubscribe'     => 'customers#unsubscribe'
+    patch  'customers/withdrawal'      => 'customers#withdrawal'
 
-    get   'items'     => 'items#index'
-    get   'items/:id' => 'items#show'
+    get    'items'     => 'items#index'
+    get    'items/:id' => 'items#show'
+
+    get    'cart_items'             => 'customers#index'
+    patch  'cart_items'             => 'customers#update'
+    delete 'cart_items'             => 'customers#destroy'
+    delete 'cart_items/destroy_all' => 'customers#destroy_all'
+    post   'cart_items'             => 'customres#create'
 
     resources :addresses, only: [:new, :index, :create, :edit, :update, :destroy]
   end

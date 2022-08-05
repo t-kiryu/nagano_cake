@@ -3,6 +3,8 @@
 class Public::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
 
+  # before_action :reject_customer, only: [:create]
+
   # GET /resource/sign_in
   def new
     super
@@ -22,7 +24,6 @@ class Public::SessionsController < Devise::SessionsController
     root_path
   end
 
-
   protected
 
   # If you have extra params to permit, append them to the sanitizer.
@@ -30,4 +31,13 @@ class Public::SessionsController < Devise::SessionsController
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
 
-end
+  # def reject_customer
+  #   @customer = Customer.find_by(email: params[:customer][:email])
+  #   if @customer
+  #     if @customer.valid_password?(params[:customer][:password]) && (@customer.active_for_authentication? == false)
+  #       flash[:alert] = "このアカウントは退会済みです。"
+  #       redirect_to root_path
+  #     end
+  #   else
+  #   end
+  end
