@@ -23,8 +23,8 @@
 
   <% @items.each do |item| %>
   <div>
-    <%= link_to item.image, items_path(item) %></br>
-    <%= item.name, %></br>
+    <%= link_to item.image, item_path(item.id) %></br>
+    <%= item.name %></br>
     ¥<%= item.with_tax_price.to_s(:delimited) %>
   </div>
   <% end %>

@@ -26,11 +26,10 @@
       <div class="nab">
         <ul>
           <% if customer_signed_in? %>
-            <li><%= link_to "マイページ", customers_my_page_path(@customer) %></li>
+            <li><%= link_to "マイページ", customers_my_page_path %></li>
             <li><%= link_to "商品一覧", items_path %></li>
 
-            <%# カート一覧ページへのリンク実装 %>
-            <li>カート</li>
+            <li>カート</li><%# カート一覧ページへのリンク実装 %>
 
             <li><%= link_to "ログアウト", destroy_customer_session_path, method: :delete %></li>
           <% elsif admin_signed_in? %>
