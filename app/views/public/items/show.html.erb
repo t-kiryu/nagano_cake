@@ -1,3 +1,35 @@
 <diV>
-  <h1>Public::Items#show</h1>
+  <table>
+    <thead>
+      <tr>
+        ジャンル検索
+      </tr>
+    </thead>
+    <tbody>
+      <%# genre.name %>
+    </tbody>
+  </table>
 </diV>
+
+
+<div>
+  <%= @item.image %>
+</div>
+
+<div>
+  <%= @item.name %><br>
+  <%= @item.introduction %><br>
+  ¥<%= @item.with_tax_price.to_s(:delimited) %><span>(税込)</span><br>
+</div>
+
+
+<div>
+  <%= form_with model: @cart_item, url: cart_items_path, method: :post do |f| %>
+    <%# 個数選択フォーム %>
+    <%= f.hidden_field :item_id, :value => @item.id %>
+    <%= f.select :amount, placeholder: "個数選択", *[1..10] %>
+
+    <%# 保存処理のリンク設定 %>
+    <%= f.submit "カートに入れる", class:"btn btn-success btn-sm" %>
+  <% end %>
+</div>
