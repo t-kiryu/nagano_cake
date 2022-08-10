@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     resources :addresses,  only: [:new, :index, :create, :edit, :update, :destroy]
     resources :items,      only: [:index, :show]
     resources :cart_items, only: [:index, :update, :destroy, :destroy_all, :create]
+    delete    'cart_items/destroy_all' => 'cart_items#destroy_all'
   end
 
   namespace :admin do

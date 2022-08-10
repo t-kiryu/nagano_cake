@@ -1,2 +1,49 @@
-<h1>Public::CartItems#index</h1>
-<p>Find me in app/views/public/cart_items/index.html.erb</p>
+<div>
+  <h1>ショッピングカート</h1>
+
+  <%= link_to "カートを空にする", cart_items_destroy_all_path, method: :delete,
+                    "data-confirm" => "本当に削除しますか？", class:"btn btn-sm btn-danger" %>
+
+</div>
+
+<div>
+  <table>
+    <thead>
+      <tr>
+        <td>商品名</td>
+        <td>単価(税込)</td>
+        <td>数量</td>
+        <td>小計</td>
+        <td></td>
+      </tr>
+    </thead>
+    <tbody>
+      <%# @cart_items.each do |cart_item| %>
+      <tr>
+        <td><%# item.name %></td>
+        <td><%# item.with_tax_price.to_s(:delimited) %></td>
+        <%# form_with model: @xxx, url: cart_item_path, method: :patch do |f| %>
+        <td>
+          <%# 個数変更ボックス %>
+          <%#= f.select :amount, *[1..10], prompt: "個数選択" %>
+          変更
+          <%# end %>
+        </td>
+        <td>小計</td>
+        <td>削除する</td>
+      </tr>
+      <%# end %>
+    </tbody>
+  </table>
+</div>
+
+<div>
+  <%= link_to "買い物を続ける", root_path, class: "btn btn-primary btn-sm" %>
+
+　<table>
+　  <tr>合計金額</tr>
+　  <tr>"各商品の合計額(税込)"</tr>
+　</table>
+</div>
+
+情報入力に進む<%# orderへ遷移 %>

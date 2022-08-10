@@ -18,9 +18,7 @@
 
 <div>
   <h1>商品一覧</h1>
-
   <b>(全<%= @items.count %>件)</b>
-
   <% @items.each do |item| %>
   <div>
     <%= link_to item.image, item_path(item.id) %></br>
