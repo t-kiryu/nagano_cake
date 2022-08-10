@@ -18,21 +18,30 @@
       </tr>
     </thead>
     <tbody>
-      <%# @cart_items.each do |cart_item| %>
+      <% @cart_items.each do |cart_item| %>
+      <% @total_price = @total_price + cart_item.subtotal %>
       <tr>
-        <td><%# item.name %></td>
-        <td><%# item.with_tax_price.to_s(:delimited) %></td>
-        <%# form_with model: @xxx, url: cart_item_path, method: :patch do |f| %>
         <td>
-          <%# 個数変更ボックス %>
-          <%#= f.select :amount, *[1..10], prompt: "個数選択" %>
-          変更
-          <%# end %>
+          <%# 商品画像 %>
+          <%= cart_item.item.name %>
         </td>
-        <td>小計</td>
-        <td>削除する</td>
+        <td>
+          <%= cart_item.item.with_tax_price.to_s(:delimited) %>
+        </td>
+        <td>
+          <%= form_with model: cart_item, url: cart_item_path(cart_item), method: :patch do |f| %>
+            <%= f.select :amount, *[1..10] %>
+            <%= f.submit "変更", class: "btn btn-success btn-sm" %>
+          <% end %>
+        </td>
+        <td>
+          <%= cart_item.subtotal.to_s(:delimited) %>
+        </td>
+        <td>
+          削除する
+        </td>
       </tr>
-      <%# end %>
+      <% end %>
     </tbody>
   </table>
 </div>
@@ -42,7 +51,7 @@
 
 　<table>
 　  <tr>合計金額</tr>
-　  <tr>"各商品の合計額(税込)"</tr>
+　  <tr><%= @total_price.to_s(:delimited) %></tr>
 　</table>
 </div>
 
