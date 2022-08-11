@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
 
+  namespace :public do
+    get 'orders/new'
+    get 'orders/confirm'
+    get 'orders/complete'
+    get 'orders/create'
+    get 'orders/index'
+    get 'orders/show'
+  end
   scope module: :public do
     root to: 'items#top'
     get   'about' => 'items#about'

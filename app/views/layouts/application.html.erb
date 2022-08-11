@@ -20,7 +20,8 @@
       <div>
         <%# 会員ログイン時にフラッシュメッセージ実装 %>
         <%# ログイン時は常に表示されるようにする %>
-        <%# 「ようこそ、##さん！」と表示 => 苗字を呼び出す実装%>
+        <%# 「ようこそ、##さん！」と表示 => 苗字を呼び出す実装 %>
+        <%# デフォルトで用意済みなのでBookers2を参考に実装 %>
       </div>
 
       <div class="nab">
@@ -28,9 +29,7 @@
           <% if customer_signed_in? %>
             <li><%= link_to "マイページ", customers_my_page_path %></li>
             <li><%= link_to "商品一覧", items_path %></li>
-
-            <li>カート</li><%# カート一覧ページへのリンク実装 %>
-
+            <li><%= link_to "カート", cart_items_path %></li>
             <li><%= link_to "ログアウト", destroy_customer_session_path, method: :delete %></li>
           <% elsif admin_signed_in? %>
             <li><%= link_to "商品一覧", admin_items_path %></li>
