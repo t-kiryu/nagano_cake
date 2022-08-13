@@ -2,13 +2,14 @@ class Public::ItemsController < ApplicationController
   before_action :authenticate_customer!, except: [:top, :about, :index, :show]
 
   def top
-    @items = Item.page(params[:page])
+    @random = Item.order("RANDOM()").limit(4)
   end
 
   def about
   end
 
   def index
+    @random = Item.order("RANDOM()").limit(8)
     @items = Item.page(params[:page])
   end
 

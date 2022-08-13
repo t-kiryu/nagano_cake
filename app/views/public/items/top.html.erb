@@ -30,14 +30,14 @@
     <h3>新着商品</h3>
 
     <div>
-      <%# 商品一覧(4コマ並べる) %>
       <%# ステータスが「販売中」のものを全商品からランダムに表示 %>
-
-      <% @items.each do |item| %>
-        <%= item.image %>
-        <%= item.name %>
-        ¥<%= item.with_tax_price.to_s(:delimited) %>
-      <% end %>
+      <%# if item.is_active == true %>
+        <% @random.each do |item| %>
+          <%# image_tag item.imag => 商品詳細へ遷移設定%>
+          <%= item.name %>
+          ¥<%= item.with_tax_price.to_s(:delimited) %>
+        <% end %>
+      <%# end %>
     </div>
 
     <div>

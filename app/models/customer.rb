@@ -6,6 +6,7 @@ class Customer < ApplicationRecord
 
   has_many :addresses,  dependent: :destroy
   has_many :cart_items, dependent: :destroy
+  # has_many :orders, dependent: :destroy
 
   enum is_deleted: {退会:true, 有効:false}
 
