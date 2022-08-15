@@ -21,7 +21,13 @@
   <b>(全<%= @items.count %>件)</b>
   <% @items.each do |item| %>
   <div>
-    <%= link_to item.image, item_path(item.id) %></br>
+    <%= link_to item_path(item.id) do %>
+      <% if item.image.attached? %>
+        <%= image_tag item.image, size: "150x120" %>
+      <% else %>
+        <%= image_tag "no_image", size: "150x120" %>
+      <% end %>
+    <% end %></br>
     <%= item.name %></br>
     ¥<%= item.with_tax_price.to_s(:delimited) %>
   </div>

@@ -1,6 +1,6 @@
 ja:
   enums:
-    item:
-      is_active:
-        true: "販売中"
-        false: "販売停止中"
+    order:
+      payment_method:
+        credit_card: "クレジットカード"
+        transfer: "銀行振込"

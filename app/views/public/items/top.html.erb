@@ -33,11 +33,16 @@
       <%# ステータスが「販売中」のものを全商品からランダムに表示 %>
       <%# if item.is_active == true %>
         <% @random.each do |item| %>
-          <%# image_tag item.imag => 商品詳細へ遷移設定%>
-          <%= item.name %>
-          ¥<%= item.with_tax_price.to_s(:delimited) %>
+          <%= link_to item_path(item.id) do %>
+            <% if item.image.attached? %>
+              <%= image_tag item.image, size: "180x120" %>
+            <% else %>
+              <%= image_tag "no_image", size: "180x120" %>
+            <% end %>
+          <% end %></br>
+          <%= item.name %></br>
+          ¥<%= item.with_tax_price.to_s(:delimited) %></br>
         <% end %>
-      <%# end %>
     </div>
 
     <div>

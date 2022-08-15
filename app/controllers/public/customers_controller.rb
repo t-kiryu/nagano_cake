@@ -25,8 +25,8 @@ class Public::CustomersController < ApplicationController
 
   def withdrawal
     @customer = Customer.find(current_customer.id)
-    # is_deletedカラムをtrueに変更することにより削除フラグを立てる
     @customer.update(is_deleted: true)
+    # ブラウザ(Cookie)等に保存されたセッション情報を全て削除
     reset_session
     flash[:notice] = "退会処理を実行しました"
     redirect_to root_path

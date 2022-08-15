@@ -13,7 +13,11 @@
 
 
 <div>
-  <%= @item.image %>
+  <% if @item.image.attached? %>
+    <%= image_tag @item.image, size: "180x120" %>
+  <% else %>
+    <%= image_tag "no_image", size: "180x120" %>
+  <% end %></br>
 </div>
 
 <div>
