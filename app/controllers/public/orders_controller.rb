@@ -5,10 +5,10 @@ class Public::OrdersController < ApplicationController
   def confirm
   end
 
-  def complete
+  def create
   end
 
-  def create
+  def complete
   end
 
   def index

@@ -1,16 +1,8 @@
 Rails.application.routes.draw do
 
-  namespace :public do
-    get 'orders/new'
-    get 'orders/confirm'
-    get 'orders/complete'
-    get 'orders/create'
-    get 'orders/index'
-    get 'orders/show'
-  end
   scope module: :public do
     root to: 'items#top'
-    get   'about' => 'items#about'
+    get    'about' => 'items#about'
     get    'customers/my_page'         => 'customers#show'
     get    'customers/infomation/edit' => 'customers#edit'
     patch  'customers/infomation'      => 'customers#update'
@@ -19,7 +11,10 @@ Rails.application.routes.draw do
     resources :addresses,  only: [:new, :index, :create, :edit, :update, :destroy]
     resources :items,      only: [:index, :show]
     resources :cart_items, only: [:index, :update, :destroy, :destroy_all, :create]
-    delete    'cart_items/destroy_all' => 'cart_items#destroy_all'
+    delete 'cart_items/destroy_all' => 'cart_items#destroy_all'
+    resources :orders,     only: [:new, :confirm, :complete, :create, :index, :show]
+    post   'orders/confirm'  => 'orders#confirm'
+    get    'orders/complete' => 'orders#complete'
   end
 
   namespace :admin do
