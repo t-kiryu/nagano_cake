@@ -1,7 +1,7 @@
 <h1>注文情報入力</h1>
 
 <div>
-  <%= form_with model: @xxx, url: orders_confirm_path, method: :post do |f| %>
+  <%= form_with model: @order, url: orders_confirm_path, method: :post do |f| %>
     <div>
       <h3>支払方法</h3>
       <div>
@@ -41,9 +41,11 @@
           <%= f.text_field :name %>
         </div>
       </div>
+      <div>
+        <%= link_to "確認画面へ進む", orders_confirm_path, class: 'btn btn-primary btn-sm' %>
+      </div>
     </div>
   <% end %>
-
-  確認画面へ進む
-  <%# link_to "確認画面へ進む", orders_confirm_path, class: 'btn btn-primary btn-sm %>
 </div>
+
+

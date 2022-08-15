@@ -21,7 +21,7 @@ Rails.application.routes.draw do
     root to: 'homes#top'
     resources :customers, only: [:index, :show, :edit, :update]
     resources :items,     only: [:new, :create, :index, :show, :edit, :update, :destroy]
-    resources :genres,    only: [:index, :create, :edit, :update, :destroy]
+    resources :genres,    only: [:index, :create, :edit, :update]
   end
 
   devise_for :customers,skip: [:passwords], controllers: {
