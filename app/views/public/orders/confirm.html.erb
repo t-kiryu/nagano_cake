@@ -1,2 +1,65 @@
-<h1>Public::Orders#confirm</h1>
-<p>Find me in app/views/public/orders/confirm.html.erb</p>
+<h1>注文情報確認</h1>
+
+<div>
+  <table>
+    <thead>
+      <tr>
+        <td>商品名</td>
+        <td>単価(税込)</td>
+        <td>数量</td>
+        <td>小計</td>
+      </tr>
+    </thead>
+    <tbody>
+      <% @cart_items.each do |cart_item| %>
+      <% @total_price = @total_price + cart_item.subtotal %>
+      <tr>
+        <td>
+          <% if cart_item.item.image.attached? %>
+            <%= image_tag cart_item.item.image, size: "60x50" %>
+          <% else %>
+            <%= image_tag "no_image", size: "60x50" %>
+          <% end %>
+          <%= cart_item.item.name %>
+        </td>
+        <td><%= cart_item.item.with_tax_price.to_s(:delimited) %></td>
+        <td><%= cart_item.amount %></td>
+        <td><%= cart_item.subtotal.to_s(:delimited) %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <%= form_with model: @order, url: orders_path, method: :post do |f| %>
+  <table>
+    <tbody>
+      <tr>
+        <td>送料</td>
+        <td><%= @shipping_cost.to_s(:delimited) %></td>
+      </tr>
+      <tr>
+        <td>商品合計</td>
+        <td><%= @total_price.to_s(:delimited) %></td>
+      </tr>
+      <tr>
+        <td>請求金額</td>
+        <td><%= (@shipping_cost + @total_price).to_s(:delimited) %></td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+    <h3>支払方法</h3>
+    <%= @order.payment_method %>
+  </div>
+  <div>
+    <h3>お届け先</h3>
+    <p>
+      〒<%= @order.postal_code %> <%= @order.address %></br>
+      <%= @order.name %>
+    </p>
+  </div>
+  <div>
+    <%= f.submit "注文を確定する", class: 'btn btn-success btn-sm' %>
+  </div>
+  <% end %>
+</div>

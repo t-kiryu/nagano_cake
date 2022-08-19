@@ -22,7 +22,11 @@
       <% @total_price = @total_price + cart_item.subtotal %>
       <tr>
         <td>
-          <%# image_tag cart_item.item.image, size: "90x90" %>
+          <% if cart_item.item.image.attached? %>
+            <%= image_tag cart_item.item.image, size: "60x50" %>
+          <% else %>
+            <%= image_tag "no_image", size: "60x50" %>
+          <% end %>
           <%= cart_item.item.name %>
         </td>
         <td>
