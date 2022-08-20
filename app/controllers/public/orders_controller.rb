@@ -47,19 +47,21 @@ class Public::OrdersController < ApplicationController
 
   # 注文情報の確定・保存
   def create
-    # confirm情報を保存
+    # confirm情報(商品注文情報のみ)を保存
     @order = Order.new(order_params)
     @order.customer_id = current_customer.id
-    if @order.save
-      # カートアイテムの繰返し？
-      cart_items.each do |cart_item|
+    if @order.save!
+      # 商品注文情報のみの保存になっているので、下記each文で各商品ごとの情報をorder_detailsへ保存
+      # カート内に商品は複数あるので、商品ごとにid, price, amountのデータを格納し、完了したらsave処理
+      current_customer.cart_items.each do |cart_item|
         order_detail = OrderDetail.new(order_id: @order.id)
         order_detail.item_id = cart_item.item_id
         order_detail.price = cart_item.item.price
         order_detail.amount = cart_item.amount
         order_detail.save!
       end
-      @cart_items.destroy_all
+      # 必要なデータの保存完了後、カート内商品を全削除
+      current_customer.cart_items.destroy_all
       redirect_to orders_complete_path
     else
       render "new"
@@ -72,18 +74,18 @@ class Public::OrdersController < ApplicationController
 
   def index
     @orders = Order.all
-    @orders.customer_id = current_customer.id
+
   end
 
   def show
     @order = Order.find(params[:id])
-    @order.customer_id = current_customer.id
+    @order_details = @order.order_details.all
   end
 
   private
 
   def order_params
-    params.require(:order).permit(:payment_method, :postal_code, :address, :name)
+    params.require(:order).permit(:payment_method, :postal_code, :address, :name, :shipping_cost, :total_price)
   end
 
   def address_params

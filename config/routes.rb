@@ -1,26 +1,17 @@
 Rails.application.routes.draw do
 
-  namespace :admin do
-    get 'orders/show'
-    get 'orders/update'
-  end
-  scope module: :public do
+    scope module: :public do
     root to: 'items#top'
     get    'about' => 'items#about'
-
     get    'customers/my_page'         => 'customers#show'
     get    'customers/infomation/edit' => 'customers#edit'
     patch  'customers/infomation'      => 'customers#update'
     get    'customers/unsubscribe'     => 'customers#unsubscribe'
     patch  'customers/withdrawal'      => 'customers#withdrawal'
-
     resources :addresses,  only: [:new, :index, :create, :edit, :update, :destroy]
-
     resources :items,      only: [:index, :show]
-
     delete 'cart_items/destroy_all' => 'cart_items#destroy_all'
     resources :cart_items, only: [:index, :update, :destroy, :destroy_all, :create]
-
     post   'orders/confirm'  => 'orders#confirm'
     get    'orders/complete' => 'orders#complete'
     resources :orders,     only: [:new, :create, :index, :show]
@@ -31,6 +22,8 @@ Rails.application.routes.draw do
     resources :customers, only: [:index, :show, :edit, :update]
     resources :items,     only: [:new, :create, :index, :show, :edit, :update, :destroy]
     resources :genres,    only: [:index, :create, :edit, :update]
+    resources :orders,    only: [:show, :update]
+    resources :order_details,only: [:update]
   end
 
   devise_for :customers,skip: [:passwords], controllers: {
