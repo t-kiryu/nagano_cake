@@ -16,18 +16,18 @@ class Public::OrdersController < ApplicationController
     @shipping_cost = 800
     @total_price = 0
     # 配送先がログインユーザー登録情報先(0) => ログインユーザーの住所情報を呼出し、@orderに格納
-    if params[:order][:shipping_address] == "0"
+    if params[:order][:shipping_address] = 0
       @order.postal_code = current_customer.postal_code
       @order.address = current_customer.address
       @order.name = current_customer.last_name + " " + current_customer.first_name
-    # 配送先が登録配送先の場合(1) => アドレスモデル内から登録住所を呼出し、@orderに格納
-    elsif params[:order][:shipping_address] == "1"
+    # 配送先が登録配送先の場合(1) => アドレスモデルからログインユーザーの登録住所を呼出し、@orderに格納
+    elsif params[:order][:shipping_address] = 1
       @address = Address.find(params[:order][:address_id])
       @order.postal_code = @address.postal_code
       @order.address = @address.address
       @order.name = @address.name
     # 配送先が新規登録先の場合(2) => アドレスモデルに住所情報を新規登録し、@addressに格納
-    elsif params[:order][:shipping_address] == "2"
+    elsif params[:order][:shipping_address] = 2
       @address = current_customer.addresses.new
       @address.postal_code = params[:order][:postal_code]
       @address.address = params[:order][:address]
@@ -74,7 +74,7 @@ class Public::OrdersController < ApplicationController
 
   def index
     @orders = Order.all
-
+    @orders = current_customer.orders
   end
 
   def show

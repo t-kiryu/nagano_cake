@@ -1,45 +1,46 @@
-<h5>商品編集</h5>
-<%= form_with model: @item, url: admin_item_path(@item.id), method: :patch do |f| %>
-  <table>
-    <tr>
-      <td><%= f.label :商品画像 %></td>
-      <td><%= f.file_field :image, accept: "image/*" %></td>
-    </tr>
+<div>
+  <div>
+    <h5>商品編集</h5>
+  </div>
+  <div>
+    <%= form_with model: @item, url: admin_item_path(@item.id), method: :patch do |f| %>
+    <table>
+      <tr>
+        <td><%= f.label :商品画像 %></td>
+        <td><%= f.file_field :image, accept: "image/*" %></td>
+      </tr>
+      <tr>
+        <td><%= f.label :商品名 %></td>
+        <td><%= f.text_field :name %></td>
+      </tr>
+      <tr>
+        <td><%= f.label :商品説明 %></td>
+        <td><%= f.text_area :introduction %></td>
+      </tr>
+      <tr>
+        <td><%= f.label :ジャンル %></td>
+        <td><%= f.select :genre_id, options_from_collection_for_select(Genre.all, :id, :name) %></td>
+      </tr>
+      <tr>
+        <td><%= f.label :税抜価格 %></td>
+        <td><%= f.text_field :price %>円</td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.label :販売ステータス %>
+        </td>
+        <td>
+          <%= f.radio_button :is_active, "販売中" %>
+          <%= f.label :is_active, "販売中" %>
 
-    <tr>
-      <td><%= f.label :商品名 %></td>
-      <td><%= f.text_field :name %></td>
-    </tr>
-
-    <tr>
-      <td><%= f.label :商品説明 %></td>
-      <td><%= f.text_area :introduction %></td>
-    </tr>
-
-    <tr>
-      <td><%= f.label :ジャンル %></td>
-      <td><%= f.select :genre_id, options_from_collection_for_select(Genre.all, :id, :name) %></td>
-    </tr>
-
-    <tr>
-      <td><%= f.label :税抜価格 %></td>
-      <td><%= f.text_field :price %>円</td>
-    </tr>
-
-    <tr>
-      <td>
-        <%= f.label :販売ステータス %>
-      </td>
-      <td>
-      <%= f.radio_button :is_active, "販売中" %>
-      <%= f.label :is_active, "販売中" %>
-
-      <%= f.radio_button :is_active, "売切れ" %>
-      <%= f.label :is_active, "売切れ" %>
-      </td>
-    </tr>
-  </table>
-
-  <%= f.submit "変更を保存" %>
-
-<% end %>
+          <%= f.radio_button :is_active, "売切れ" %>
+          <%= f.label :is_active, "売切れ" %>
+        </td>
+      </tr>
+    </table>
+    <div>
+      <%= f.submit "変更を保存", class: 'btn btn-success' %>
+    </div>
+    <% end %>
+  </div>
+</div>

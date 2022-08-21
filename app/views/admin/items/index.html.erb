@@ -23,9 +23,7 @@
       <td><%= link_to item.name, admin_item_path(item.id) %></td>
       <td><%= item.price.to_s(:delimited) %></td>
       <td><%= item.genre.name %></td>
-      <td><%= item.is_active %>
-      </td>
-      <td><%= link_to "削除", admin_item_path(item.id), method: :delete %></td>
+      <td><%= item.is_active %></td>
     </tr>
     <% end %>
   </tbody>

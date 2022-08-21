@@ -1,6 +1,22 @@
+# 上から枝分かれしていくイメージで記述
+# 同一である部分は記述不要
 ja:
   enums:
     order:
       payment_method:
         credit_card: "クレジットカード"
         transfer: "銀行振込"
+
+      shipping_address:
+        my_address: "ご自身の住所"
+        registered_address: "登録済住所から選択"
+        new_address: "新しいお届け先"
+      #status:
+      #  : "入金待ち"
+      #  : "入金確認"
+      #  : "製作中"
+      #  : "発送準備中"
+      #  : "発送済み"
+  time:
+    formats:
+      default: "%Y/%m/%d %H:%M:%S"

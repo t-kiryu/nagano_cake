@@ -50,8 +50,10 @@
     </tbody>
   </table>
   <div>
+  <%# form_withを使用しているがf.text_field等の形でないと保存(create)処理不可 %>
+  <%# 上記を解消するためhidden_fieldでデータを渡す %>
     <h3>支払方法</h3>
-    <%= @order.payment_method %>
+    <%= @order.payment_method_i18n %>
     <%= f.hidden_field :payment_method, :value => @order.payment_method %>
   </div>
   <div>

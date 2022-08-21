@@ -16,6 +16,7 @@ class Public::CartItemsController < ApplicationController
   end
 
   def index
+    # ログインユーザーのカート商品
     @cart_items = current_customer.cart_items
     @total_price = 0
   end

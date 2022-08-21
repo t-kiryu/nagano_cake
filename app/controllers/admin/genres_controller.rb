@@ -22,8 +22,6 @@ class Admin::GenresController < ApplicationController
     redirect_to admin_genres_path
   end
 
-  end
-
   private
 
   def genre_params

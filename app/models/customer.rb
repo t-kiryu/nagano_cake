@@ -13,7 +13,7 @@ class Customer < ApplicationRecord
 
   # 退会済アカウントのログイン防止制約
   #def active_for_authentication?
-  #  super && (is_deleted == true)
+  #  super && (is_deleted == false)
   #end
 
 end

@@ -4,6 +4,8 @@ class Public::AddressesController < ApplicationController
   def index
     @address = Address.new
     @addresses = Address.all
+    # ログインユーザーの情報のみ表示
+    @addresses = current_customer.addresses
   end
 
   def create
