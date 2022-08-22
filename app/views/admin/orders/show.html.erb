@@ -17,16 +17,20 @@
         <tr>
           <th>配送先</th>
           <td>
-
+            〒<%= @order.postal_code.to_s.insert(3, "-") %> <%= @order.address %></br>
+            <%= @order.name %>
           </td>
         </tr>
         <tr>
           <th>支払方法</th>
-          <td>xxx</td>
+          <td><%= @order.payment_method_i18n %></td>
         </tr>
         <tr>
           <th>注文ステータス</th>
-          <td>xxx</td>
+          <%= form_with model: @order, url: admin_order_path, method: :patch do |f| %>
+            <td><%= f.select :status, Order.statuses.keys, class: "status" %></td>
+            <td><%= f.submit "更新" , class: 'btn btn-success btn-sm' %></td>
+          <% end %>
         </tr>
       </table>
     </div>
@@ -43,11 +47,18 @@
         </thead>
         <tbody>
           <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+          <% @orders.each do |order_detail| %>
+            <td><%= order_detail.item.name %></td>
+            <td><%= order_detail.item.with_tax_price.to_s(:delimited) %></td>
+            <td><%= order_detail.amount %></td>
+            <td><%= (order_detail.item.with_tax_price * order_detail.amount).to_s(:delimited) %></td>
+            <td>
+              <%= form_with model: @order_detail, url: admin_order_detail_path, method: :patch do |f| %>
+                <%= f.select :making_status, OrderDetail.making_statuses.keys, class: "making_status" %>
+                <%= f.submit "更新" , class: 'btn btn-success btn-sm' %>
+              <% end %>
+            </td>
+          <% end %>
           </tr>
         </tbody>
       </table>
@@ -56,15 +67,15 @@
       <table>
         <tr>
           <th>商品合計</th>
-          <td></td>
+          <td><%= @order.total_price.to_s(:delimited) %></td>
         </tr>
         <tr>
           <th>送料</th>
-          <td></td>
+          <td><%= @order.shipping_cost.to_s(:delimited) %></td>
         </tr>
         <tr>
           <th>請求金額合計</th>
-          <td></td>
+          <td><%= (@order.total_price + @order.shipping_cost).to_s(:delimited) %></td>
         </tr>
       </table>
     </div>

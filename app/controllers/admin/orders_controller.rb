@@ -1,9 +1,22 @@
 class Admin::OrdersController < ApplicationController
+  before_action :authenticate_admin!
+
   def show
     @order = Order.find(params[:id])
     @orders = @order.order_details
   end
 
   def update
+    @order = Order.find(params[:id])
+    @order.update(params_status)
+    # ↓ renderするために追加
+    @orders = @order.order_details
+    render :show
+  end
+
+  private
+
+  def params_status
+    params.require(:order).permit(:status)
   end
 end
