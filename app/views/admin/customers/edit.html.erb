@@ -2,6 +2,15 @@
   <h5><%= @customer.last_name + @customer.first_name %>さんの会員情報編集</h5>
 </div>
 
+<% if @customer.errors.any? %>
+  <%= @customer.errors.count %>件のエラーが発生しました
+  <ul>
+    <% @customer.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
 <div>
   <%= form_with model: @customer, url: admin_customer_path(@customer.id), method: :patch do |f| %>
   <table>

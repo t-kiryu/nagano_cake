@@ -1,27 +1,34 @@
-<div>
-  <h1>会員一覧</h1>
+<div class="container">
+  <div classa="row">
+    <div class"col-12">
+      <h3 class="mt-5">会員一覧</h3>
+      <div class="form-group col-10 mx-auto mt-4">
+        <table class="table table-hover">
+          <thead class="thead-dark">
+            <tr>
+              <td>会員ID</td>
+              <td>氏名</td>
+              <td>メールアドレス</td>
+              <td>ステータス</td>
+            </tr>
+          </thead>
+          <tbody>
+            <% @customers.each do |customers| %>
+            <tr>
+              <td><%= customers.id %></td>
+              <td><%= link_to customers.last_name + customers.first_name, admin_customer_path(customers.id) %></td>
+              <td><%= customers.email %></td>
+              <td><%= customers.is_deleted %></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      <div class="page navigation">
+        <ul class="pagination justify-content-center">
+          <li class="page-link"><%= paginate @customers %></li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </div>
-
-<table>
-  <thead>
-    <tr>
-      <td>会員ID</td>
-      <td>氏名</td>
-      <td>メールアドレス</td>
-      <td>ステータス</td>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @customers.each do |customers| %>
-    <tr>
-      <td><%= customers.id %></td>
-      <td><%= link_to customers.last_name + customers.first_name, admin_customer_path(customers.id) %></td>
-      <td><%= customers.email %></td>
-      <td><%= customers.is_deleted %></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<div><%= paginate @customers %></div>

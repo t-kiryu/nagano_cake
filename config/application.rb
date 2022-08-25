@@ -28,5 +28,7 @@ module NaganoCake
     # タイムゾーンを日本時間に設定
     config.time_zone = 'Asia/Tokyo'
 
+    # バリデーションエラー時のレイアウト崩れ防止
+    config.action_view.field_error_proc = Proc.new { |html_tag, instance| html_tag }
   end
 end

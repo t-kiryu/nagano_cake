@@ -1,52 +1,55 @@
-<div>
-  <%# ジャンル検索機能の実装 %>
-  <%# 部分テンプレート作成・実装 %>
-  <table>
-    <thead>
-      <tr>ジャンル検索</tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>
-          <%# genre.name %>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <%# ジャンル検索機能の実装 %>
+      <%# 部分テンプレート作成・実装 %>
+      <table>
+        <thead>
+          <tr><%# genre検索 %></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%# 登録genre一覧表示 %></td>
+          </tr>
+        </tbody>
+      </table>
+      <div>
+        <div>
+          <%# バックグラウンドイメージ画像 %>
+        </div>
+        <div class="top">
+          <p class="top-introduction mt-4 text-center">
+            ようこそ、ながのCAKEへ！</br>
+            このサイトは、ケーキ販売のECサイトになります。</br>
+            会員でない方も商品の閲覧はできますが、</br>
+            購入には会員登録が必要になります。
+          </p>
+        </div>
+        <div class="top-item mt-5">
+          <h1 class="top-item-title">新着商品</h1>
+          <%# ステータスが「販売中」のものを全商品からランダムに表示 %>
+          <%# if item.is_active == true %>
 
-<div>
-  <%# バックグラウンドイメージ画像 %>
-  <div>
-    <p>
-      ようこそ、ながのCAKEへ！</br>
-      このサイトは、ケーキ販売のECサイトになります。</br>
-      会員でない方も商品の閲覧はできますが、</br>
-      購入には会員登録が必要になります。
-    </p>
-  </div>
-
-  <div>
-    <h3>新着商品</h3>
-
-    <div>
-      <%# ステータスが「販売中」のものを全商品からランダムに表示 %>
-      <%# if item.is_active == true %>
-        <% @random.each do |item| %>
-          <%= link_to item_path(item.id) do %>
-            <% if item.image.attached? %>
-              <%= image_tag item.image, size: "180x120" %>
-            <% else %>
-              <%= image_tag "no_image", size: "180x120" %>
+          <div class="top-item-list row row-cols-4 mt-4"><%# "row row-cols-4"で12列に4つ(3列1商品)表示 %>
+            <% @random.each do |item| %>
+              <div class="top-item-list-item col"><%# "col"で商品表示枠を用意 %>
+                <%= link_to item_path(item.id) do %>
+                  <% if item.image.attached? %>
+                    <%= image_tag item.image, size: "180x150" %>
+                  <% else %>
+                    <%= image_tag "no_image", size: "180x150" %>
+                  <% end %>
+                <% end %></br>
+                <%= item.name %></br>
+                ¥<%= item.with_tax_price.to_s(:delimited) %></br>
+              </div>
             <% end %>
-          <% end %></br>
-          <%= item.name %></br>
-          ¥<%= item.with_tax_price.to_s(:delimited) %></br>
-        <% end %>
-    </div>
-
-    <div>
-      <%= link_to "全ての商品を見る >",items_path %>
+          </div>
+          <div class="top-item-all text-right mt-3">
+            <%= link_to "全ての商品を見る >",items_path %>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

@@ -9,8 +9,8 @@ class Public::ItemsController < ApplicationController
   end
 
   def index
-    @random = Item.order("RANDOM()").limit(8)
-    @items = Item.page(params[:page])
+    #@random = Item.order("RANDOM()").limit(8)
+    @items = Item.page(params[:page]).per(8)
   end
 
   def show

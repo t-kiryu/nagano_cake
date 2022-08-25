@@ -2,6 +2,18 @@
   <div>
     <h5>商品編集</h5>
   </div>
+
+  <% if @item.errors.any? %>
+    <div id="error_explanation">
+      <h3><%= @item.errors.count %> errors prohibited this obj from being saved:</h3>
+      <ul>
+        <% @item.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <div>
     <%= form_with model: @item, url: admin_item_path(@item.id), method: :patch do |f| %>
     <table>

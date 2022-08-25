@@ -1,39 +1,41 @@
-<div>
+  <%# ジャンル検索機能
   <table>
     <thead>
       <tr>
         <th>ジャンル検索</th>
-        <%# 登録しているジャンルidを呼び出す => genre.name
-        <%# each文を使って登録済みジャンルを全部表示？ %>
-        <%# itemsとgenresのアソシエーション必要？ %>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td><%# @item.genre.name %></td>
+        <td></td>
       </tr>
     </tbody>
   </table>
-</div>
-
-<div>
-  <h1>商品一覧</h1>
-  <b>(全<%= @items.count %>件)</b>
-  <% @items.each do |item| %>
-  <div>
-    <%= link_to item_path(item.id) do %>
-      <% if item.image.attached? %>
-        <%= image_tag item.image, size: "150x120" %>
-      <% else %>
-        <%= image_tag "no_image", size: "150x120" %>
+  %>
+<div class="container">
+  <div classs="row">
+    <div class="item mt-4">
+      <h1 class="item-title">商品一覧</h1>
+      <b>(全<%= @items.count %>件)</b>
+    </div>
+    <div class="item-list row row-cols-4 mt-3"><%# "row row-cols-4"で12列に4つ(3列1商品)表示 %>
+      <% @items.each do |item| %>
+        <div>
+          <%= link_to item_path(item.id) do %>
+            <% if item.image.attached? %>
+              <%= image_tag item.image, size: "220x180" %>
+            <% else %>
+              <%= image_tag "no_image", size: "220x180" %>
+            <% end %>
+          <% end %></br>
+          <%= item.name %></br>
+          ¥<%= item.with_tax_price.to_s(:delimited) %>
+        </div>
       <% end %>
-    <% end %></br>
-    <%= item.name %></br>
-    ¥<%= item.with_tax_price.to_s(:delimited) %>
+    </div>
+    <div class="item-pagination">
+      <%= paginate @items %>
+    </div>
   </div>
-  <% end %>
 </div>
 
-<%# ページネーションを1ページ8商品表示にしたい %>
-<%# indexアクションへpageの後に.per(8)を入れたらカウント数がうまくいかない %>
-<%= paginate @items %>

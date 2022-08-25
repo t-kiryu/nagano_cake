@@ -3,13 +3,13 @@ class Admin::OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
-    @orders = @order.order_details
+    @order_details = @order.order_details
   end
 
   def update
     @order = Order.find(params[:id])
     @order.update(params_status)
-    # ↓ renderするために追加
+    # ↓ render用
     @orders = @order.order_details
     render :show
   end

@@ -4,7 +4,7 @@ class Admin::OrderDetailsController < ApplicationController
   def update
     @order_detail = OrderDetail.find(params[:id])
     @order_detail.update(params_making_status)
-    redirect_to admin_order_path
+    redirect_to admin_order_path(@order_detail.order)
   end
 
   private

@@ -10,10 +10,13 @@ class Customer < ApplicationRecord
 
   enum is_deleted: {退会:true, 有効:false}
 
-
-  # 退会済アカウントのログイン防止制約
-  #def active_for_authentication?
-  #  super && (is_deleted == false)
-  #end
+  validates :email,            presence: true
+  validates :last_name,        presence: true
+  validates :first_name,       presence: true
+  validates :last_name_kana,   presence: true
+  validates :first_name_kana,  presence: true
+  validates :postal_code,      presence: true, length: {is: 7}
+  validates :address,          presence: true
+  validates :telephone_number, presence: true, length: {is: 11}
 
 end

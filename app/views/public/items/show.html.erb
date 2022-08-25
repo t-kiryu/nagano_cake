@@ -1,36 +1,34 @@
+<%#
 <diV>
   <table>
     <thead>
-      <tr>
-        ジャンル検索
-      </tr>
+      <tr>ジャンル検索</tr>
     </thead>
-    <tbody>
-      <%# genre.name %>
-    </tbody>
+    <tbody>ジャンル名一覧</tbody>
   </table>
 </diV>
+%>
 
-<div>
-  <% if @item.image.attached? %>
-    <%= image_tag @item.image, size: "180x120" %>
-  <% else %>
-    <%= image_tag "no_image", size: "180x120" %>
-  <% end %></br>
+<div class="container">
+  <div class="row">
+      <div>
+        <% if @item.image.attached? %>
+          <%= image_tag @item.image, size: "180x150" %>
+        <% else %>
+           <%= image_tag "no_image", size: "420x350" %>
+         <% end %></br>
+      </div>
+      <div>
+        <h3><b><%= @item.name %></b></h3><br>
+        <%= @item.introduction %><br>
+        ¥<%= @item.with_tax_price.to_s(:delimited) %><span>(税込)</span><br>
+          <% if customer_signed_in? %>
+            <%= form_with model: @cart_item, url: '/cart_items', method: :post do |f| %>
+              <%= f.hidden_field :item_id, :value => @item.id %>
+              <%= f.select :amount, *[1..10], prompt: "個数選択" %>
+              <%= f.submit "カートに入れる", class:"btn btn-success btn-sm" %>
+            <% end %>
+          <% end %>
+      </div>
+  </div>
 </div>
-
-<div>
-  <%= @item.name %><br>
-  <%= @item.introduction %><br>
-  ¥<%= @item.with_tax_price.to_s(:delimited) %><span>(税込)</span><br>
-</div>
-
-<% if customer_signed_in? %>
-<div>
-  <%= form_with model: @cart_item, url: '/cart_items', method: :post do |f| %>
-    <%= f.hidden_field :item_id, :value => @item.id %>
-    <%= f.select :amount, *[1..10], prompt: "個数選択" %>
-    <%= f.submit "カートに入れる", class:"btn btn-success btn-sm" %>
-  <% end %>
-</div>
-<% end %>

@@ -1,32 +1,37 @@
-<div>
-  <h5>商品一覧</h5>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h3 class="mt-5">商品一覧</h3>
+      <div class="text-right">
+        <%= link_to new_admin_item_path do %>
+          <i class="fas fa-plus fa-2x"></i>
+        <% end %>
+      </div>
+    </div>
+    <div class="form-group col-10 mx-auto">
+      <table class="table table-borderless table-hover">
+        <thead class="thead-dark">
+          <tr>
+            <th>商品ID</th>
+            <th>商品名</th>
+            <th>税抜価格</th>
+            <th>ジャンル</th>
+            <th>ステータス</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @items.each_with_index do |item, i| %>
+          <tr>
+            <td><%= i + 1 %></td>
+            <td><%= link_to item.name, admin_item_path(item.id) %></td>
+            <td><%= item.price.to_s(:delimited) %></td>
+            <td><%= item.genre.name %></td>
+            <td><%= item.is_active %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <div class="text-center"><%= paginate @items %></div>
+    </div>
+  </div>
 </div>
-
-<div>
-  <%= link_to "商品新規登録", new_admin_item_path %>
-</div>
-
-<table>
-  <thead>
-    <tr>
-      <th>商品ID</th>
-      <th>商品名</th>
-      <th>税抜価格</th>
-      <th>ジャンル</th>
-      <th>ステータス</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @items.each_with_index do |item, i| %>
-    <tr>
-      <td><%= i + 1 %></td>
-      <td><%= link_to item.name, admin_item_path(item.id) %></td>
-      <td><%= item.price.to_s(:delimited) %></td>
-      <td><%= item.genre.name %></td>
-      <td><%= item.is_active %></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<div><%= paginate @items %></div>
