@@ -10,7 +10,7 @@ class Admin::OrdersController < ApplicationController
     @order = Order.find(params[:id])
     @order.update(params_status)
     # ↓ render用
-    @orders = @order.order_details
+    @order_details = @order.order_details
     render :show
   end
 
