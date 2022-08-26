@@ -1,79 +1,74 @@
-<div>
-  <h1>注文履歴詳細</h1>
-</div>
-
-<div>
-  <div>
-    <b>注文情報</b>
-    <table>
-      <tbody>
-        <tr>
-          <td>注文日</td>
-          <td><%= @order.created_at.strftime('%Y/%m/%d') %></td>
-        </tr>
-        <tr>
-          <td>配送先</td>
-          <td>
-            〒<%= @order.postal_code %></br>
-            <%= @order.address %></br>
-            <%= @order.name %>
-          </td>
-        </tr>
-        <tr>
-          <td>支払方法</td>
-          <td><%= @order.payment_method %></td>
-        </tr>
-        <tr>
-          <td>ステータス</td>
-          <td><%= @order.status %></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div>
-    <b>請求情報</b>
-    <table>
-      <tbody>
-        <tr>
-          <td>商品合計</td>
-          <td><%= @order.total_price.to_s(:delimited) %></td>
-        </tr>
-        <tr>
-          <td>配送料</td>
-          <td><%= @order.shipping_cost.to_s(:delimited) %></td>
-        </tr>
-        <tr>
-          <td>ご請求額</td>
-          <td><%= (@order.shipping_cost + @order.total_price).to_s(:delimited) %></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div>
-    <b>注文内容</b>
-    <div>
-      <table>
-        <thead>
-          <tr>
-            <td>商品</td>
-            <td>単価(税込)</td>
-            <td>個数</td>
-            <td>小計</td>
-          </tr>
-        </thead>
+<div class="container">
+  <h3 class="mt-5 ml-5">注文履歴詳細</h3>
+  <div class="row">
+    <div class="col-6 mt-3">
+      <b>注文情報</b>
+      <table class="table table-bordered table-sm">
         <tbody>
-        <% @order_details.each do |order_detail| %>
           <tr>
-            <td><%= order_detail.item.name %></td>
-            <td><%= order_detail.item.with_tax_price.to_s(:delimited) %></td>
-            <td><%= order_detail.amount %></td>
-            <td><%= (order_detail.price * order_detail.amount * 1.1).floor.to_s(:delimited) %></td>
+            <td class="bg-secondary text-white">注文日</td>
+            <td><%= @order.created_at.strftime('%Y/%m/%d') %></td>
           </tr>
-        <% end %>
+          <tr>
+            <td class="bg-secondary text-white">配送先</td>
+            <td>
+              〒<%= @order.postal_code %></br>
+              <%= @order.address %></br>
+              <%= @order.name %>
+            </td>
+          </tr>
+          <tr>
+            <td class="bg-secondary text-white">支払方法</td>
+            <td><%= @order.payment_method_i18n %></td>
+          </tr>
+          <tr>
+            <td class="bg-secondary text-white">ステータス</td>
+            <td><%= @order.status %></td>
+          </tr>
         </tbody>
       </table>
     </div>
+    <div class="col-4 mt-3">
+      <b>請求情報</b>
+      <table class="table table-bordered table-sm">
+        <tbody>
+          <tr>
+            <td class="bg-secondary text-white">商品合計</td>
+            <td><%= @order.total_price.to_s(:delimited) %></td>
+          </tr>
+          <tr>
+            <td class="bg-secondary text-white">配送料</td>
+            <td><%= @order.shipping_cost.to_s(:delimited) %></td>
+          </tr>
+          <tr>
+            <td class="bg-secondary text-white"><b>ご請求額</b></td>
+            <td><%= (@order.shipping_cost + @order.total_price).to_s(:delimited) %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="form-group mt-3">
+    <b>注文内容</b>
+    <table class="table table-bordered table-sm col-7">
+      <thead class="thead-dark">
+        <tr>
+          <td class="bg-secondary text-white">商品</td>
+          <td class="bg-secondary text-white">単価(税込)</td>
+          <td class="bg-secondary text-white">個数</td>
+          <td class="bg-secondary text-white">小計</td>
+        </tr>
+      </thead>
+      <tbody>
+      <% @order_details.each do |order_detail| %>
+        <tr>
+          <td><%= order_detail.item.name %></td>
+          <td><%= order_detail.item.with_tax_price.to_s(:delimited) %></td>
+          <td><%= order_detail.amount %></td>
+          <td><%= (order_detail.price * order_detail.amount * 1.1).floor.to_s(:delimited) %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
   </div>
 </div>

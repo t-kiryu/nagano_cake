@@ -6,16 +6,15 @@
         <%= link_to "カートを空にする", cart_items_destroy_all_path, method: :delete, 'data-confirm' => "本当に削除しますか？", class: 'btn btn-sm btn-danger' %>
       </div>
     </div>
-    <div class="col-12 mx-auto mt-5">
+    <div class="form-group col-12 mx-auto mt-5">
       <table class="table table-bordered table-hover">
-        <div class="form-group">
         <thead class="thead-dark">
           <tr>
-            <td scope="col">商品名</td>
-            <td scope="col">単価(税込)</td>
-            <td scope="col">数量</td>
-            <td scope="col">小計</td>
-            <td scope="col"></td>
+            <td scope="col bg-secondary text-white">商品名</td>
+            <td scope="col bg-secondary text-white">単価(税込)</td>
+            <td scope="col bg-secondary text-white">数量</td>
+            <td scope="col bg-secondary text-white">小計</td>
+            <td scope="col bg-secondary text-white"></td>
           </tr>
         </thead>
         <tbody>
@@ -48,7 +47,6 @@
           </tr>
           <% end %>
         </tbody>
-        </div>
       </table>
     </div>
     <div class="row col-12">
