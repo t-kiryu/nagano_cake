@@ -1,52 +1,50 @@
-<div>
+<div class="container">
   <p id="notice"><%= flash[:notice] %></p>
-
-  <div>
-    <h5>マイページ</h5>
+  <h5 class="mt-5 ml-5">マイページ</h5>
+  <div class="form-group mt-4">
+    <b class="mr-3">登録情報</b>
+    <%= link_to "編集する", customers_infomation_edit_path, class: "btn btn-success btn-sm" %>
   </div>
-
-  <div>
-    <b>登録情報</b>
-    <%= link_to "編集する", customers_infomation_edit_path %>
-  </div>
-
-  <div>
-    <table>
+  <div class="form-group mt-4">
+    <table class="table table-bordered table-hover col-7">
       <tbody>
         <tr>
-          <td>氏名</td>
-          <td><%= @customer.last_name + "　" + @customer.first_name %></td>
+          <td class="col-2">氏名</td>
+          <td class="col-5"><%= @customer.last_name + "　" + @customer.first_name %></td>
         </tr>
         <tr>
-          <td>カナ</td>
-          <td><%= @customer.last_name_kana + "　" + @customer.first_name_kana %></td>
+          <td class="col-2">カナ</td>
+          <td class="col-5"><%= @customer.last_name_kana + "　" + @customer.first_name_kana %></td>
         </tr>
         <tr>
-          <td>郵便番号</td>
-          <td><%=@customer.postal_code %></td>
+          <td class="col-2">郵便番号</td>
+          <td class="col-5"><%=@customer.postal_code %></td>
         </tr>
         <tr>
-          <td>住所</td>
-          <td><%=@customer.address %></td>
+          <td class="col-2">住所</td>
+          <td class="col-5"><%=@customer.address %></td>
         </tr>
         <tr>
-          <td>電話番号</td>
-          <td><%=@customer.telephone_number  %></td>
+          <td class="col-2">電話番号</td>
+          <td class="col-5"><%=@customer.telephone_number  %></td>
         </tr>
         <tr>
-          <td>メールアドレス</td>
-          <td><%=@customer.email %></td>
+          <td class="col-2">メールアドレス</td>
+          <td class="col-5"><%=@customer.email %></td>
         </tr>
       </tbody>
     </table>
-
-    <div>
-      <b>配送先</b>
-      <%= link_to "一覧を見る", addresses_path, class: "btn btn-primary btn-sm" %>
-    </div>
-    <div>
-      <b>注文履歴</b>
-      <%= link_to "一覧を見る", orders_path, class: "btn btn-primary btn-sm" %>
-    </div>
+  </div>
+  <div class="form-group mt-4">
+    <table class="table table-borderless table-sm col-4">
+      <tr>
+        <td class="col-1"><b>配送先</b></td>
+        <td class="col-2"><%= link_to "一覧を見る", addresses_path, class: "btn btn-primary btn-sm" %></td>
+      </tr>
+      <tr>
+        <td class="col-1"><b>注文履歴</b></td>
+        <td class="col-2"><%= link_to "一覧を見る", orders_path, class: "btn btn-primary btn-sm" %></td>
+      </tr>
+    </table>
   </div>
 </div>
