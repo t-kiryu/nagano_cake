@@ -11,7 +11,7 @@
     </ul>
   <% end %>
 
-  <%= form_with model: @address, url: 'addresses', method: :post do |f| %>
+  <%= form_with model: @address, url: addresses_path, method: :post do |f| %>
     <div class="form-group mt-4">
       <table class="table table-borderless table-sm">
         <tr>
